@@ -1,0 +1,7 @@
+{
+    "student":[
+        {"no":1,"name":"yangli","age":18},
+        {"no":2,"name":"zhnagyunayuan","age":20},
+        {"no":3,"name":"liming","age":21}
+    ]
+}

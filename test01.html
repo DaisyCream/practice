@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>get the massage of txt</title>
+</head>
+<body>
+    <table cellspacing="20" cellpadding="5">
+        <tr>
+            <th>NO</th>
+            <th>NAME</th>
+            <th>AGE</th>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+    <input type="button" value="onclick" onclick="getRequest()">
+    <div id="cool"></div>
+</body>
+</html>
+<script type="text/javascript">
+    var xhr;
+    var obj;
+    var text = document.getElementsByTagName('tr');
+    function getRequest(){
+        if(window.XMLHttpRequest){
+            xhr = new XMLHttpRequest();
+        }
+        else{
+            xhr = new ActiveXObject("Microsoft.XMLHttp");
+        }
+        xhr.onreadystatechange = function(){
+            if(xhr.status==200 && xhr.readyState==4){
+                console.log("1");
+                obj = eval("(" + xhr.responseText + ")");
+                for(var i=1;i<text.length;i++){
+                    var textTd = text[i].getElementsByTagName('td');
+                        textTd[0].innerHTML = obj.student[i-1].no;
+                        textTd[1].innerHTML = obj.student[i-1].name;
+                        textTd[2].innerHTML = obj.student[i-1].age;
+                }
+            }
+        };
+        xhr.open("GET","massage.txt",true);
+        xhr.send(null);
+    }
+</script>
