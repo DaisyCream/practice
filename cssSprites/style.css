@@ -1,0 +1,32 @@
+ul{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+li{
+    height: 24px;
+    position: relative;
+    /*margin-top: 2px;*/
+    /*border: 1px solid #000;*/
+    list-style: none;
+    margin-top: 2px;
+    border: 1px solid #000000;
+}
+
+li span{
+    position: relative;
+    width: 17px;
+    height: 17px;
+    background-image: url("./ico.png");
+    display: inline-block;
+    overflow: hidden;
+    /*border: 1px solid #000000;*/
+    margin-right: 10px;
+    padding-top: 5px;
+}
+
+ul .a1{
+    background-position: -62px -32px;
+}

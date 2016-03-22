@@ -1,7 +1,2 @@
-{
-    "student":[
-        {"no":1,"name":"yangli","age":18},
-        {"no":2,"name":"zhnagyunayuan","age":20},
-        {"no":3,"name":"liming","age":21}
-    ]
-}
+<h1>AJAX is not a programming language.</h1>
+<h2>It is just a technique for creating better and more interactive web applications.</h2>
