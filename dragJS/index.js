@@ -22,7 +22,7 @@ function  mouseDrag(target){
         }
         else return;
     };
-    window.onmousemove = function(e){
+    document.onmousemove = function(e){
         if(isDrag == 1) {
             target.style.left = e.clientX - mouse.x  + 'px';
             target.style.top = e.clientY - mouse.y + 'px';

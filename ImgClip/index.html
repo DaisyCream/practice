@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<style type="text/css">
+    body{
+        margin: 0px;
+        padding: 0px;
+    }
+    .l{
+        float: left;
+    }
+    .img{
+        margin-top: 30px;
+        position: absolute;
+        display: block;
+    }
+    #clipBlock{
+        position: absolute;
+        width: 140px;
+        height: 140px;
+        background-color: #000000;
+        border: 1px solid #000000;
+        opacity: 0.5;
+        cursor: move;
+    }
+</style>
+<body>
+    <div class="l">
+        <img id="cropTestImg" src="louis.jpg" height="380" />
+        <img id="rectTestImg" class="img" src="louis.jpg" height="380"/>
+    </div>
+    <div id="clipBlock"></div>
+</body>
+</html>
+<script type="text/javascript">
+    function selector(target){
+        return document.querySelector(target);
+    }
+
+    var clipBlock = selector("#clipBlock");
+    var img = selector(".img");
+    var cropTestImg = selector("#cropTestImg");
+    var clipFun = {};
+
+    function getDocumentLeft(target){
+        var left = target.offsetLeft;
+        var parent = target.offsetParent;
+        while(parent != null){
+            left += parent.offsetLeft;
+            parent = parent.offsetParent;
+        }
+        return left;
+    }
+
+    function getDocumentTop(target){
+        var top = target.offsetTop;
+        var parent = target.offsetParent;
+        while(parent != null){
+            top += parent.offsetTop;
+            parent = parent.offsetParent;
+        }
+        return top;
+    }
+
+    //等到图片加载完成后才能获取
+
+
+
+    clipFun.move = function(target, conditionX, conditionY){
+        console.log(conditionX.r,conditionX.l);
+        var canMove = false;
+        target.style.top = "0px";
+        target.style.left = "0px";
+        var arrow = {
+            x : 0,
+            y : 0
+        };
+        target.onmousedown = function(e){
+            e = e || window.event;
+            arrow.x = e.clientX - parseInt(target.style.left) ;
+            arrow.y = e.clientY - parseInt(target.style.top) ;
+            canMove = true;
+            console.log("onmousedown");
+        };
+
+        target.onmouseup = function(e){
+            e = e || window.event;
+            if(canMove){
+                canMove = false;
+            }
+            console.log("onmouseup");
+        };
+
+        document.onmousemove = function(e){
+            e = e || window.event;
+            if(canMove){
+                console.log("onmouseMove");
+                if(parseInt(target.style.left)>conditionX.l && parseInt(target.style.left)<conditionX.r){
+                    if(parseInt(target.style.top)>conditionY.t && parseInt(target.style.top)<conditionY.b){
+                        target.style.left = e.clientX - arrow.x + "px";
+                        target.style.top = e.clientY - arrow.y + "px";
+                    }
+                }
+
+            }
+        };
+
+
+
+    };
+
+    cropTestImg.onload = function(){
+
+//        console.log(cropTestImg.abs.x.l + cropTestImg.width,cropTestImg.abs.x.r);
+        console.log(cropTestImg.abs.x.r);
+        clipFun.move(clipBlock,cropTestImg.abs.x,cropTestImg.abs.y);
+    };
+
+
+    //按下————>立即放开
+    //按下————》拖动————》放开
+
+
+    cropTestImg.abs = {
+        x : {
+            l : getDocumentLeft(cropTestImg),
+            r : cropTestImg.width + cropTestImg.abs.x.l
+        },
+        y : {
+            t : getDocumentTop(cropTestImg),
+            b : cropTestImg.height
+        }
+    };
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
